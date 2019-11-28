@@ -5,14 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Bookstore</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/lightbox.min.css" />
   </head>
   <body class="body">
     <div class="topnav">
       <img id="logo" src="./images/logo2.png" alt="logo" />
-      <input type="text" placeholder="Search.." />
+      <input
+        id="mySelect"
+        type="text"
+        onkeyup="searchFunction()"
+        placeholder="Search.."
+      />
     </div>
-    <div id="cards" class="flexcontainer"></div>
-    <script src="main.js"></script>
+    <div id="loader"></div>
+    <div id="cards" style="display:none;" class="flexcontainer"></div>
+    <script src="js/main.js"></script>
+    <script src="js/lightbox-plus-jquery.min.js"></script>
   </body>
 </html>
