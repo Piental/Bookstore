@@ -11,92 +11,83 @@ fetch("https://api.myjson.com/bins/zyv02")
   });
 
 function addingCardDivs() {
-  for (var i = 0; i < books.length; i++) {
-    var newCard = document.createElement("div");
-    newCard.id = "flip-card" + i;
-    newCard.className = "flip-card";
-    /* Second way to add class: newflip-card.classList.add("card");*/
-    /* newflip-card.textContent = "flip-card" + (i + 1);*/
-    document.getElementById("cards").appendChild(newCard);
-  }
+  var newCard = document.createElement("div");
+  newCard.id = "flip-card" + i;
+  newCard.className = "flip-card";
+  /* Second way to add class: newflip-card.classList.add("card");*/
+  /* newflip-card.textContent = "flip-card" + (i + 1);*/
+  document.getElementById("cards").appendChild(newCard);
 }
 
 function addingFlipCards() {
-  for (var i = 0; i < books.length; i++) {
-    var idCardDiv = "flip-card" + i;
-    var newFlipCard = document.createElement("div");
-    newFlipCard.id = "flip-card-inner" + i;
-    newFlipCard.className = "flip-card-inner";
-    document.getElementById(idCardDiv).appendChild(newFlipCard);
-  }
+  var idCardDiv = "flip-card" + i;
+  var newFlipCard = document.createElement("div");
+  newFlipCard.id = "flip-card-inner" + i;
+  newFlipCard.className = "flip-card-inner";
+  document.getElementById(idCardDiv).appendChild(newFlipCard);
 }
 
 function addingFrontCards() {
-  for (var i = 0; i < books.length; i++) {
-    var idFlipCard = "flip-card-inner" + i;
-    var newFrontCard = document.createElement("div");
-    newFrontCard.id = "flip-card-front" + i;
-    newFrontCard.className = "flip-card-front";
-    document.getElementById(idFlipCard).appendChild(newFrontCard);
-  }
+  var idFlipCard = "flip-card-inner" + i;
+  var newFrontCard = document.createElement("div");
+  newFrontCard.id = "flip-card-front" + i;
+  newFrontCard.className = "flip-card-front";
+  document.getElementById(idFlipCard).appendChild(newFrontCard);
 }
 
 function addingBackCards() {
-  for (var i = 0; i < books.length; i++) {
-    var idFlipCard = "flip-card-inner" + i;
-    var newBackCard = document.createElement("div");
-    newBackCard.id = "flip-card-back" + i;
-    newBackCard.className = "flip-card-back";
-    document.getElementById(idFlipCard).appendChild(newBackCard);
-  }
+  var idFlipCard = "flip-card-inner" + i;
+  var newBackCard = document.createElement("div");
+  newBackCard.id = "flip-card-back" + i;
+  newBackCard.className = "flip-card-back";
+  document.getElementById(idFlipCard).appendChild(newBackCard);
 }
 
-function addingCovers() {
-  for (var i = 0; i < books.length; i++) {
-    var url = books[i].cover;
-    document.getElementById("flip-card-front" + i).style.backgroundImage =
-      "url(" + books[i].cover + ")";
-  }
+function addingCovers(element) {
+  var urlCover = element;
+  document.getElementById("flip-card-front" + i).style.backgroundImage =
+    "url(" + urlCover + ")";
 }
 
-function addingContentToBackCards() {
-  for (var i = 0; i < books.length; i++) {
-    var idBackCard = "flip-card-back" + i;
+function addingContentToBackCards(title, description, detail) {
+  var idBackCard = "flip-card-back" + i;
 
-    /* adding title */
-    var titleSource = books[i].title;
-    var descriptionSource = books[i].description;
-    var title = document.createElement("h4");
-    title.className = "title";
-    title.innerHTML = titleSource;
+  /* adding title */
+  var displayTitle = document.createElement("h4");
+  displayTitle.className = "title";
+  displayTitle.innerHTML = title;
 
-    /* adding description */
-    var description = document.createElement("p");
-    description.className = "description";
-    description.innerHTML = descriptionSource;
+  /* adding description */
+  var displayDescription = document.createElement("p");
+  displayDescription.className = "description";
+  displayDescription.innerHTML = description;
 
-    /* adding button */
-    var createA = document.createElement("a");
-    var detail = books[i].detail;
-    createA.setAttribute("href", detail);
-    createA.setAttribute("data-lightbox", "mygallery");
-    createA.className = "button";
-    createA.innerHTML = "More info";
-    document.getElementById(idBackCard).appendChild(title);
-    document.getElementById(idBackCard).appendChild(description);
-    document.getElementById(idBackCard).appendChild(createA);
-  }
+  /* adding button */
+  var createA = document.createElement("a");
+  createA.setAttribute("href", detail);
+  createA.setAttribute("data-lightbox", "mygallery");
+  createA.className = "button";
+  createA.innerHTML = "More info";
+  document.getElementById(idBackCard).appendChild(displayTitle);
+  document.getElementById(idBackCard).appendChild(displayDescription);
+  document.getElementById(idBackCard).appendChild(createA);
 }
 
 /* calling each function to create flip cards */
-
+var i = 0;
 function displayContent() {
-  addingCardDivs();
-  addingFlipCards();
-  addingFrontCards();
-  addingBackCards();
-  addingCovers();
-  addingContentToBackCards();
+  for (i; i < books.length; i++) {
+    var book = books[i].cover;
+    var titleSource = books[i].title;
+    var descriptionSource = books[i].description;
+    var detail = books[i].detail;
+    addingCardDivs();
+    addingFlipCards();
+    addingFrontCards();
+    addingBackCards();
+    addingCovers(book);
+    addingContentToBackCards(titleSource, descriptionSource, detail);
+  }
 }
 
 function searchFunction() {
